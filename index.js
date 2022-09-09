@@ -6,6 +6,7 @@ const User = require("./schema");
 userCreation()
 updateAddress()
 deleteAddress()
+findAddress()
 
 async function userCreation(){
     try{
@@ -19,7 +20,8 @@ async function userCreation(){
         state : "karnataka",
         city : "udupi",
         pinCode : 570001
-    } ]
+    } ],
+    age : 20
     },
     {
     firstName : "vpn",
@@ -34,6 +36,7 @@ async function userCreation(){
         street2 : "manipal1",
         pinCode : 570001
     }] ,
+    age : 25
     },
     {
     firstName : "sumukh",
@@ -46,7 +49,8 @@ async function userCreation(){
         city : "mysuru",
         street3 : "Mys",
         pinCode : 570001
-    }]
+    }],
+    age : 28
 },
 {
     firstName : "prasad",
@@ -59,7 +63,8 @@ async function userCreation(){
         city : "DK",
         street1 : "udupi",
         pinCode : 570001
-    }]
+    }],
+    age : 25
 },
 {
     firstName : "preetham",
@@ -71,8 +76,8 @@ async function userCreation(){
         state : "karnataka",
         city : "manipal",
         pinCode : 570001
-    }]
-}
+    }],    age : 25
+},   
   
      ])
       console.log("user inserted successful =\n")
@@ -84,14 +89,29 @@ async function userCreation(){
  
 async function updateAddress(){
     try{
-        const findUser = await User.find({
+        const updateUser = await User.findOneAndUpdate({
             firstName: "sandesh" 
-        }).update({
-            address:{
-                city : "banglore"
+        },{$set : {address :[{
+            city : null
+        }]}})
+          
+      
+        console.log("update user",updateUser)
+    }
+    catch(error){
+        console.log(error.message)
+   }
+}
+async function findAddress(){
+    try{
+        const findUser = await User.find({},{_v:0},{limit:3},(documents,error)=>{
+            if(documents){
+                console.log(documents);
+            }
+            else{
+                console.log(error)
             }
         })
-        console.log("updated user",findUser)
     }
     catch(error){
         console.log(error.message)
