@@ -13,7 +13,7 @@ async function userCreation(){
     const user = await User.insertMany([{
     firstName : "sandesh",
     lastName : "Prabhu",
-    DOB : 21-02-2000,
+    DOB : new Date('2000-05-01'),
     email : "sandesh@gmail.com",
     phoneNumber : 9874565426,
     address :[{
@@ -26,7 +26,7 @@ async function userCreation(){
     {
     firstName : "vpn",
     lastName : "san",
-    DOB : 2000-07-11,
+    DOB : new Date('2000-08-01'),
     email : "vpn@gmail.com",
     phoneNumber : 9874565426,
     address :[{
@@ -41,7 +41,7 @@ async function userCreation(){
     {
     firstName : "sumukh",
     lastName : "r",
-    DOB : 21-02-2000,
+    DOB :new Date('2000-02-11'),
     email : "sr@gmail.com",
     phoneNumber : 9874565426,
     address :[{
@@ -69,7 +69,7 @@ async function userCreation(){
 {
     firstName : "preetham",
     lastName : "u",
-    DOB : 21-02-2000,
+    DOB : new Date('2000-01-01'),
     email : "pun@gmail.com",
     phoneNumber : 9874565426,
     address :[{
