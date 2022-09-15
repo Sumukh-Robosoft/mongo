@@ -173,7 +173,7 @@ async function popAddress(){
         const deleteCity = await User.updateOne({
             firstName: "preetham" 
         },{$pull : { address:{
-            city:"Manipal"
+            city:"manipal"
         }}})
           
       
