@@ -21,32 +21,41 @@ const userSchema = new mongoose.Schema ({
         type : Number,
         required : true,
     },
-    address :[ {
+    address : [{
+      
       state:  {
             type: String,
-            required:true
+
+            required:true ,
+                                                                                             
         },
        city:{
         type : String,
-        required : true
+       required : true,
+     
       },
     street1:  {
         type: String,
-        required:false
+        required:false,
+      
     },
     street2:  {
         type: String,
-        required:false
+        required:false,
+ 
     },
     street3:  {
         type: String,
-        required:false
+        required:false,
+         
     },
     pinCode:{
         type : Number,
-        required : true
-      }
-    }],
+        required : true,
+       
+      },
+    }]
+   ,
     age : Number
 });
  module.exports = mongoose.model("User",userSchema);
