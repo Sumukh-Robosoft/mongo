@@ -3,10 +3,10 @@ mongoose.connect('mongodb://localhost:27017/person')
 
 const User = require("./schema");
 
-// userCreation()
-// updateAddress()
-// // deleteUser()
-// findAddress()
+userCreation()
+updateAddress()
+deleteUser()
+findAll()
 
 async function userCreation(){
     try{
@@ -115,7 +115,8 @@ async function updateAddress(){
         console.log(error.message)
    }
 }
-async function findAddress(){
+
+async function findAll(){
     try{
         const findUser = await User.find({},{_v:0},{limit:3},(documents,error)=>{
             if(documents){
@@ -143,10 +144,9 @@ async function deleteUser(){
 }
  
 findUserById()
-
 async function findUserById(){
     try {
-        const userId = User.findByIdAndRemove({_id:mongoose.Types.ObjectId('63219873985ec1d129cacbab')},function(error,data){
+        const userId = User.findByIdAndRemove({_id:mongoose.Types.ObjectId('6322ed75c701f5d1feb1385f')},function(error,data){
             if(error) console.log(error)
             console.log(data)
         })
@@ -155,13 +155,81 @@ async function findUserById(){
         console.log(error)
     }
 }
+
 updateById()
 async function updateById(){
     try{
-        let stateUpdate = await User.updateOne({"address._id":"63219873848e2262a5b1def5"},{$set:{"address.$.state":"mysuru"}})
+        let stateUpdate = await User.updateOne({"address._id":"6322ed75c701f5d1feb1385f"},{$set:{"address.$.state":"mysuru"}})
         console.log(stateUpdate)
     }
     catch(error){
         console.log(error);
     }
 }
+
+popAddress()
+async function popAddress(){
+    try{
+        const deleteCity = await User.updateOne({
+            firstName: "preetham" 
+        },{$pull : { address:{
+            city:"Manipal"
+        }}})
+          
+      
+        console.log("Pop city",deleteCity)
+    }
+    catch(error){
+        console.log(error.message)
+   }
+}
+
+
+//Aggregation
+// const agg = [
+//     {
+//       '$project': {
+//         '_id': 1, 
+//         'firstName': 1, 
+//         'lastName': 1, 
+//         'age': 1, 
+//         'address.state': 1, 
+//         'address.city': 1
+//       }
+//     }, {
+//       '$match': {
+//         'address.state': 'karnataka', 
+//         'age': {
+//           '$gt': 20
+//         }
+//       }
+//     }, {
+//       '$group': {
+//         '_id': '$address.city', 
+//         'groupAge': {
+//           '$avg': '$age'
+//         }, 
+//         'maxAge': {
+//           '$max': '$age'
+//         }, 
+//         'minAge': {
+//           '$min': '$age'
+//         }
+//       }
+//     }, {
+//       '$sort': {
+//         'maxAge': -1
+//       }
+//     }, {
+//       '$count': 'count'
+//     }
+//   ];
+  
+//   const client = await MongoClient.connect(
+//     'mongodb://localhost:27017/',
+//     { useNewUrlParser: true, useUnifiedTopology: true }
+//   );
+//   const coll = client.db('person').collection('users');
+//   const cursor = coll.aggregate(agg);
+//   const result = await cursor.toArray();
+//   await client.close();
